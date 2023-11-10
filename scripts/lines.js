@@ -54,6 +54,9 @@ function draw(){
   }
   if(send){
     fadeIn(device);
+    if(!resumeContext){
+      resumeContext=true;
+    }
   };
 }
 
