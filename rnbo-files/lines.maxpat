@@ -519,7 +519,7 @@
 						}
 ,
 						"classnamespace" : "rnbo",
-						"rect" : [ 290.0, 129.0, 842.0, 480.0 ],
+						"rect" : [ -21292.0, -21249.0, 842.0, 480.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -21134,7 +21134,7 @@
 										"sendinit" : 1
 									}
 ,
-									"rnbo_serial" : 1,
+									"rnbo_serial" : 20,
 									"rnbo_uniqueid" : "duty",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -21522,7 +21522,7 @@
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "param duty @min 0.5 @max 0.99 @value 0.99",
+									"text" : "param duty @min 0.5 @max 0.99 @value 0.96",
 									"varname" : "duty"
 								}
 
@@ -22469,7 +22469,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 367.5, 243.0, 213.0, 23.0 ],
+									"patching_rect" : [ 367.5, 243.0, 220.0, 23.0 ],
 									"rnbo_classname" : "param",
 									"rnbo_extra_attributes" : 									{
 										"tonormalized" : "",
@@ -22487,7 +22487,7 @@
 										"sendinit" : 1
 									}
 ,
-									"rnbo_serial" : 3,
+									"rnbo_serial" : 21,
 									"rnbo_uniqueid" : "gain",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -22875,7 +22875,7 @@
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "param gain @min 0. @max 1. @value 1.",
+									"text" : "param gain @min 0. @max 1. @value 0.1",
 									"varname" : "gain"
 								}
 
@@ -26965,7 +26965,17 @@
 						"bgfillcolor_color2" : [ 0.263682, 0.004541, 0.038797, 1.0 ],
 						"bgfillcolor_angle" : 270.0,
 						"bgfillcolor_proportion" : 0.39,
-						"bgfillcolor_autogradient" : 0.0
+						"bgfillcolor_autogradient" : 0.0,
+						"export_config" : 						{
+							"web-export" : 							{
+								"json-web-export" : 								{
+									"file_name" : "lines.export.json"
+								}
+
+							}
+
+						}
+
 					}
 ,
 					"patching_rect" : [ 266.0, 401.0, 561.0, 22.0 ],
