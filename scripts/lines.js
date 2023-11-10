@@ -11,8 +11,8 @@ function setup(){
   createCanvas(windowWidth, windowHeight);
   background(255);
   for(let i=0;i<20;i++){
-    let x=random(windowWidth/2*random(.9,1.1));
-    let y=random(windowHeight/2*random(.9,1.1));
+    let x=windowWidth/2*random(.9,1.1);
+    let y=windowHeight/2*random(.9,1.1);
     let spEed=random(20,50);
     let x_lo;
     let x_hi;
@@ -52,7 +52,11 @@ function draw(){
     lines[i].grow();
     lines[i].reposition();
   }
+  if(send){
+    fadeIn(device);
+  };
 }
+
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 }
@@ -86,6 +90,7 @@ class crawlingLines{
     rnboTempo=this.spEed;
     if(send){
       setTarget(device);
+      fadeIn(device);
       sonify(device);
     }
   }
@@ -139,6 +144,7 @@ class crawlingLines{
     rnboTempo=this.spEed;
     if(send){
       setTarget(device);
+      fadeIn(device);
       sonify(device);
     }
   }
@@ -148,8 +154,8 @@ class crawlingLines{
       noStroke();
       fill(255, 20);
       rect(0,0,width,height);
-      this.x=width/2*random(.9,1.1);
-      this.y=height/2*random(.9,1.1);
+      this.x=mouseX*random(.9,1.1);
+      this.y=mouseY*random(.9,1.1);
       this.spEed=random(20,50);
       let chanceX=random(100);
       if(chanceX>50){
@@ -180,8 +186,50 @@ class crawlingLines{
       rnboTempo=this.spEed;
       if(send){
         setTarget(device);
+        fadeIn(device);
         sonify(device);
       }
     }
   }
+
+  click(){
+    noStroke();
+    fill(255, 20);
+    rect(0,0,width,height);
+    this.x=mouseX*random(.9,1.1);
+    this.y=mouseY*random(.9,1.1);
+    this.spEed=random(20,50);
+    let chanceX=random(100);
+    if(chanceX>50){
+      this.x_lo=-5;
+      this.x_hi=30;
+    }else{
+      this.x_lo=-30;
+      this.x_hi=5;
+    }
+    this.skewX=random(this.x_lo, this.x_hi);
+    let chanceY=random(100);
+    if(chanceY>50){
+      this.y_lo=-5;
+      this.y_hi=30;
+    }else{
+      this.y_lo=-30;
+      this.y_hi=5;
+    }
+    this.skewY=random(this.y_lo, this.y_hi);
+    this.x_target=this.x+this.skewX;
+    this.y_target=this.y+this.skewY;
+    this.x_inc=(this.x_target-this.x)/this.spEed;
+    this.y_inc=(this.y_target-this.y)/this.spEed;
+    this.brEak=0;
+    rnboTarget=this.target;
+    rnboPan=this.x;
+    rnboFreq=this.y;
+    rnboTempo=this.spEed;
+    if(send){
+      setTarget(device);
+      sonify(device);
+    }
+  }
 }
+
