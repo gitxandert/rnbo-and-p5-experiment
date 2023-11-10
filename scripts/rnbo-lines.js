@@ -56,14 +56,12 @@ async function setup() {
     }
   
     device.node.connect(outputNode);
+    
+    const gain=device.parametersById.get('gain');
+    gain.value=0.;
+    context.resume();
+    send=true;
 
-    context.suspend();
-    const button=document.getElementById('start-button');
-    button.addEventListener('click', () =>{
-      context.resume();
-      send=true;
-    });
-  
   }
 
   function setTarget(device){
@@ -92,9 +90,6 @@ async function setup() {
     const duty=device.parametersById.get('duty');
     duty.value=.99;
 
-    device.parameters.forEach((param) => {
-      console.log(param.id + ' = ' + param.value);
-    })
   }
 
 function normalize(val, valLo, valHi, outLo, outHi){
@@ -108,5 +103,12 @@ function normalize(val, valLo, valHi, outLo, outHi){
    let percent = (val - valLo) / valDiff;
    return outLo + (percent * outDiff);
 }
-  
-  setup();
+
+function fadeIn(device){
+  const gain=device.parametersById.get('gain');
+  if(gain.value<.1){
+    gain.value+=.000001;
+  }
+}
+
+setup();
