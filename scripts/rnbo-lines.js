@@ -1,3 +1,6 @@
+let device;
+let send=false;
+
 async function setup() {
     const patchExportURL = "rnbo-files/lines.export.json";
   
@@ -40,9 +43,7 @@ async function setup() {
       }
       return;
     }
-  
-    // Create the device
-    let device;
+
     try {
       device = await RNBO.createDevice({ context, patcher });
     } catch (err) {
@@ -60,39 +61,52 @@ async function setup() {
     const button=document.getElementById('start-button');
     button.addEventListener('click', () =>{
       context.resume();
-      if(context.resume()){
-        console.log('resumed');
-      }else{
-        console.log('failed?');
-      }
+      send=true;
     });
-  
-    sonify(device);
   
   }
 
-  
+  function setTarget(device){
+    const target=device.parametersById.get('target');
+    target.value=rnboTarget;
+  }
+
   function sonify(device){
     const currentDate = new Date();
     const scale = device.parametersById.get('scale');
     scale.value = currentDate.getHours();
-    console.log(scale.value);
+    //console.log(scale.value);
 
-    let target=device.parametersById.get('target');
-    target.value=rnboTarget;
-    console.log(target.value);
+    const pan=device.parametersById.get('pan');
+    pan.value=normalize(rnboPan, 0, width, 0., 1.);
+    //console.log(pan.value);
 
-    let pan=device.parametersById.get('pan');
-    pan.value=rnboPan;
-    console.log(pan.value);
+    const freq=device.parametersById.get('freq');
+    freq.value=normalize(rnboFreq, 0, height, 1000, 20);
+    //console.log(freq.value);
 
-    let freq=device.parametersById.get('freq');
-    freq.value=rnboFreq;
-    console.log(freq.value);
+    const tempo=device.parametersById.get('tempo');
+    tempo.value=normalize(rnboTempo, 20, 50, 50, 200);
+    //console.log(tempo.value);
 
-    let tempo=device.parametersById.get('tempo');
-    tempo.value=rnboTempo;
-    console.log(tempo.value);
+    const duty=device.parametersById.get('duty');
+    duty.value=.99;
+
+    device.parameters.forEach((param) => {
+      console.log(param.id + ' = ' + param.value);
+    })
   }
+
+function normalize(val, valLo, valHi, outLo, outHi){
+   if (val < valLo){
+      val = valLo;
+   } else if (val > valHi){
+      val = valHi;
+   }
+   let valDiff = valHi - valLo;
+   let outDiff = outHi - outLo;
+   let percent = (val - valLo) / valDiff;
+   return outLo + (percent * outDiff);
+}
   
   setup();
