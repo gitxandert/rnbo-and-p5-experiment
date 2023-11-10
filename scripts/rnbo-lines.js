@@ -1,5 +1,6 @@
 let device;
 let send=false;
+let resumeContext=false;
 
 async function setup() {
     const patchExportURL = "rnbo-files/lines.export.json";
@@ -59,8 +60,18 @@ async function setup() {
     
     const gain=device.parametersById.get('gain');
     gain.value=0.;
-    context.resume();
-    send=true;
+    
+    context.suspend();
+    const text=document.querySelector('.start');
+    document.addEventListener('click', ()=>{
+      console.log('clicked');
+      if(!send){
+        context.resume();
+        send=true;
+        text.classList.toggle('fadeOut', true);
+      }
+      console.log(send, context.resume());
+    })
 
   }
 
