@@ -1,9 +1,9 @@
 let lines = [];
 
-let rnboTarget;
-let rnboFreq;
-let rnboPan;
-let rnboTempo;
+let rnboTarget=0;
+let rnboFreq=0;
+let rnboPan=0;
+let rnboTempo=0;
 
 
 function setup(){
@@ -84,6 +84,10 @@ class crawlingLines{
     rnboPan=this.x;
     rnboFreq=this.y;
     rnboTempo=this.spEed;
+    if(send){
+      setTarget(device);
+      sonify(device);
+    }
   }
   
   grow(){
@@ -96,6 +100,7 @@ class crawlingLines{
       if(this.x>this.x_target || this.y>this.y_target){
         this.x_target=this.x+random(this.x_lo, this.x_hi);
         this.y_target=this.y+random(this.y_lo, this.y_hi);
+        this.speed=random(20,50);
         this.x_inc=(this.x_target-this.x)/this.spEed;
         this.y_inc=(this.y_target-this.y)/this.spEed;
       }
@@ -104,6 +109,7 @@ class crawlingLines{
       if(this.x>this.x_target || this.y<this.y_target){
         this.x_target=this.x+random(this.x_lo, this.x_hi);
         this.y_target=this.y+random(this.y_lo, this.y_hi);
+        this.speed=random(20,50);
         this.x_inc=(this.x_target-this.x)/this.spEed;
         this.y_inc=(this.y_target-this.y)/this.spEed;
       }
@@ -112,6 +118,7 @@ class crawlingLines{
       if(this.x<this.x_target || this.y>this.y_target){
         this.x_target=this.x+random(this.x_lo, this.x_hi);
         this.y_target=this.y+random(this.y_lo, this.y_hi);
+        this.speed=random(20,50);
         this.x_inc=(this.x_target-this.x)/this.spEed;
         this.y_inc=(this.y_target-this.y)/this.spEed;
       }
@@ -120,6 +127,7 @@ class crawlingLines{
       if(this.x<this.x_target || this.y<this.y_target){
         this.x_target=this.x+random(this.x_lo, this.x_hi);
         this.y_target=this.y+random(this.y_lo, this.y_hi);
+        this.speed=random(20,50);
         this.x_inc=(this.x_target-this.x)/this.spEed;
         this.y_inc=(this.y_target-this.y)/this.spEed;
       }
@@ -129,6 +137,10 @@ class crawlingLines{
     rnboPan=this.x;
     rnboFreq=this.y;
     rnboTempo=this.spEed;
+    if(send){
+      setTarget(device);
+      sonify(device);
+    }
   }
   
   reposition(){
@@ -166,6 +178,10 @@ class crawlingLines{
       rnboPan=this.x;
       rnboFreq=this.y;
       rnboTempo=this.spEed;
+      if(send){
+        setTarget(device);
+        sonify(device);
+      }
     }
   }
 }
